@@ -86,21 +86,28 @@ const getQtyProductsByCode = (productCode) => {
     let sumOfQty = 0
     let productIsFound = false
     let productName = ''
+    let storageId = []
 
     for (let i = 0; i < lengthOfProduct; i++) {
         const currentProductCode = json.data[i].productCode
-
+        const currentStorageId = json.data[i].storageId
         const qty = json.data[i].quantity
 
         if (currentProductCode.toLowerCase() == productCode.toLowerCase()) {
             sumOfQty += qty
             productName = json.data[i].productName
+            storageId.push(currentStorageId)
             productIsFound = true
         }
     }
 
     if (productIsFound) {
-        console.log(`Total Qty dari Product "${productName}" : ${sumOfQty} pcs`)
+        console.log(
+            '\n====== Product Search Result ======\n' +
+                `Total Quantity : ${sumOfQty} pcs\n` +
+                `Product Name   : ${productName}\n` +
+                `Storage Count  : ${storageId.length}\n`,
+        )
     } else {
         console.log('Maaf Product yang kamu cari tidak ditemukan!')
     }
