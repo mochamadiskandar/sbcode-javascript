@@ -125,12 +125,12 @@ const calculateProductQuantity = () => {
     )
     getInput('Input keyword yang mau kamu cari :', (searchTerm) => {
         // Cek apakah input adalah kode produk atau nama produk
-        getQtyProductsByCode(searchTerm)
-        // if (!isNaN(searchTerm)) {
-        //     getQtyProductPakeCode(searchTerm)
-        // } else {
-        //     getQtyProductsByName(searchTerm)
-        // }
+        const searchType = isNaN(searchTerm) ? 'name' : 'productCode;'
+        if (!isNaN(searchType === 'name')) {
+            getQtyProductsByName(searchTerm)
+        } else {
+            getQtyProductsByCode(searchTerm)
+        }
         askToContinue()
     })
 }
