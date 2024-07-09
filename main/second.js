@@ -1,4 +1,4 @@
-const source = require('./soal2.json')
+const source = require('./second-data.json')
 const readline = require('readline')
 const rl = readline.createInterface({
     input: process.stdin,

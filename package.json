@@ -4,8 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "soal1": "node soal1.js",
-        "soal2": "node soal2.js"
+        "first": "node main/first.js",
+        "second": "node main/second.js"
     },
     "repository": {
         "type": "git",
