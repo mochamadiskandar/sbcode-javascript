@@ -7,14 +7,12 @@ const rl = readline.createInterface({
 
 const json = source
 
-// test get data
+// test direct get data from json
 // console.log(json.data[0].productName)
-console.log(json.data[0].productCode)
+// console.log(json.data[0].productCode)
 // console.log(json.data[0].quantity)
-// console.log(json.data[1].quantity)
-// console.log(json.data[2].quantity)
 
-// Fungsi untuk input product code atau nama produk
+// function untuk input
 const getInput = (prompt, callback) => {
     rl.question(prompt, (input) => {
         const searchTerm = input.trim() //clear unused space
@@ -27,10 +25,10 @@ const getInput = (prompt, callback) => {
     })
 }
 
-// Fungsi untuk konfirmasi lanjut atau tidak
+// function untuk konfirmasi lanjut atau tidak
 const askToContinue = () => {
     rl.question(
-        'Kamu mau menghitung Qty Product lainnya? (y/n): ',
+        'anda mau menghitung Qty Product lainnya? (y/n): ',
         (answer) => {
             if (
                 answer.toLowerCase() === 'yes' ||
@@ -46,41 +44,7 @@ const askToContinue = () => {
     )
 }
 
-// Fungsi untuk mendapatkan jumlah produk berdasarkan nama produk
-const getQtyProductsByName = (name) => {
-    const lengthOfProduct = json.data.length
-    let sumOfQty = 0
-    let productIsFound = false
-    let productName = ''
-
-    for (let i = 0; i < lengthOfProduct; i++) {
-        // Regex pattern untuk mencocokkan kata secara tepat
-        const regex = new RegExp(`\\b${name}\\b`, 'i')
-
-        const currentProductName = json.data[i].productName
-
-        const qty = json.data[i].quantity
-
-        // if (currentProductName.toLowerCase() == name.toLowerCase()) {
-        //     sumOfQty += qty
-        //     productName = currentProductName
-        //     productIsFound = true
-        // }
-
-        if (regex.test(currentProductName)) {
-            sumOfQty += qty
-            productName = currentProductName
-            productIsFound = true
-        }
-    }
-
-    if (productIsFound) {
-        console.log(`Total Qty dari Product "${productName}" : ${sumOfQty} pcs`)
-    } else {
-        console.log('Maaf Product yang kamu cari tidak ditemukan!')
-    }
-}
-
+// function untuk mendapatkan jumlah produk berdasarkan productCode
 const getQtyProductsByCode = (productCode) => {
     const lengthOfProduct = json.data.length
     let sumOfQty = 0
@@ -109,7 +73,7 @@ const getQtyProductsByCode = (productCode) => {
                 `Storage Count  : ${storageId.length}\n`,
         )
     } else {
-        console.log('Maaf Product yang kamu cari tidak ditemukan!')
+        console.log('Maaf Product yang anda cari tidak ditemukan!')
     }
 }
 
@@ -120,17 +84,12 @@ const calculateProductQuantity = () => {
     |-----------------|----------------------|
     | FBR00040101     | FloBrand-DressBSPink |
         
-    *🚀 ~ Hint: Silahkan Input keyword yang mau kamu cari
+    *🚀 ~ Hint: Above is the tabel of products
     `,
     )
-    getInput('Input keyword yang mau kamu cari :', (searchTerm) => {
-        // Cek apakah input adalah kode produk atau nama produk
+    getInput('Input keyword yang mau anda cari :', (searchTerm) => {
         getQtyProductsByCode(searchTerm)
-        // if (!isNaN(searchTerm)) {
-        //     getQtyProductPakeCode(searchTerm)
-        // } else {
-        //     getQtyProductsByName(searchTerm)
-        // }
+
         askToContinue()
     })
 }
